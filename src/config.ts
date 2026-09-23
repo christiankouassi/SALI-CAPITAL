@@ -7,15 +7,7 @@ export const PAGES_CONFIG: Record<PageKey, { sections: string[] }> = {
   },
   commodities: {
     sections: [
-      'commodities-presentation',
-      'commodities-services-1a',
-      'commodities-services-1b',
-      'commodities-services-2a',
-      'commodities-services-2b',
-      'commodities-products-1',
-      'commodities-products-2',
-      'commodities-markets',
-      'commodities-contact'
+      'commodities-presentation'
     ]
   },
   dassouli: {

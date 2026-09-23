@@ -176,7 +176,7 @@ export default function SaliDigiCom({
       {/* Slide Transition Wrapper */}
       <div 
         className="w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] will-change-transform"
-        style={{ transform: `translateY(-${currentSection * 100}%)` }}
+        style={{ transform: isDigiComDomain ? `translateY(-${currentSection * 100}%)` : 'none' }}
       >
         {/* PARALLAX SCREEN 0: PRESENTATION OF DIGICOM (Hero) */}
         <section id="digicom-presentation" className={`relative h-[100dvh] flex items-center justify-center px-[5vw] overflow-hidden ${sectionPadds}`}>
@@ -211,6 +211,8 @@ export default function SaliDigiCom({
               <div className="ae ae-up mt-8" data-d="3">
                 <a 
                   href="https://www.sali-digicom.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center bg-[#1d9878] text-white px-8 py-3.5 text-[10px] font-bold tracking-[2px] uppercase transition-all hover:bg-[#157159]"
                   style={{ clipPath: 'polygon(0 0, calc(100% - 11px) 0, 100% 11px, 100% 100%, 11px 100%, 0 calc(100% - 11px))' }}
                 >

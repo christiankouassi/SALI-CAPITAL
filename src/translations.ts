@@ -391,7 +391,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     sections: {
       main: ['Accueil', 'Qui sommes-nous ?', 'Nos filiales', 'Contact'],
-      commodities: ['SALI Commodities', 'Nos services', 'Nos services', 'Marque blanche', 'Conseil & digital', 'Origine Maroc', 'Produits internationaux', 'Nos marchés', 'Rejoignez notre réseau'],
+      commodities: ['SALI Commodities'],
       dassouli: ['Foncière Dassouli', 'Nos locaux disponibles', 'Contact'],
       digicom: ['SALI DigiCom', 'Pôle Web', 'Pôle Branding', 'Pôle Marketing', 'Pôle IA & Automatisation', 'Notre approche', 'Nos valeurs', 'Notre portée', 'Contact']
     },
@@ -827,7 +827,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     sections: {
       main: ['Home', 'Who We Are', 'Our Subsidiaries', 'Contact'],
-      commodities: ['SALI Commodities', 'Our services', 'Our services', 'White label', 'Advisory & digital', 'Morocco origin', 'International products', 'Our markets', 'Join our network'],
+      commodities: ['SALI Commodities'],
       dassouli: ['Foncière Dassouli', 'Our available premises', 'Contact'],
       digicom: ['SALI DigiCom', 'Web Department', 'Branding Department', 'Marketing Department', 'AI & Automation', 'Our Approach', 'Our Values', 'Our Reach', 'Contact']
     },
@@ -1254,7 +1254,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     sections: {
       main: ['الرئيسية', 'من نحن؟', 'شركاتنا التابعة', 'تواصل معنا'],
-      commodities: ['سالي للسلع', 'خدماتنا', 'خدماتنا', 'علامة تجارية خاصة', 'استشارة ورقمنة', 'أصل المغرب', 'منتجات دولية', 'أسواقنا', 'انضم إلى شبكتنا'],
+      commodities: ['سالي للسلع'],
       dassouli: ['فونسير الدسولي', 'عقاراتنا المتاحة', 'الاتصال'],
       digicom: ['سالي ديجي كوم', 'قسم الويب', 'قسم الهوية البصرية', 'التسويق الرقمي', 'الذكاء الاصطناعي', 'منهجيتنا', 'قيمنا', 'رؤيتنا', 'اتصل بنا']
     },
@@ -1321,6 +1321,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       formTitle: "لديك مشروع؟ اكتب إلينا",
       formTitleCommodities: "هل أنت مهتم بأحد منتجاتنا؟ هل لديك منتجات لتعرضها علينا؟ اكتب إلينا",
       formTitleDassouli: "هل أنت مهتم؟ اطلب زيارة أو معلومات إضافية",
+      formTitleDigicom: "هل لديك مشروع موقع إلكتروني، هوية بصرية، أو تكامل ذكاء اصطناعي؟ تحدث إلى خبرائنا.",
       fullName: "الاسم الكامل",
       emailLabel: "البريد الإلكتروني",
       phoneLabel: "رقم الهاتف",
@@ -1336,11 +1337,13 @@ export const translations: Record<Language, TranslationDictionary> = {
       placeholderMessage: "كيف يمكننا مساعدتك؟",
       placeholderMessageCommodities: "كيف يمكننا مساعدتك؟",
       placeholderMessageDassouli: "كيف يمكننا مساعدتك؟",
+      placeholderMessageDigicom: "صف مشروعك (موقع ويب، هوية بصرية، ذكاء اصطناعي...)",
       placeholderCompany: "شركتك الموقرة...",
       placeholderConcept: "علامتك التجارية",
       btnSend: "إرسال",
       btnSendCommodities: "إرسال المقترح الكلي",
       btnSendDassouli: "تقديم طلبي",
+      btnSendDigicom: "أطلق مشروعي",
       successTitle: "تم الإرسال بنجاح!",
       successTitleDassouli: "تم استلام الطلب!",
       successDesc: "تم إرسال رسالتك بنجاح وتوجيهها إلى الإدارة الرئيسية للمجموعة: hd@sali-capital.com. سيقوم فريقنا بدراسة اقتراح الشراكة خلال 24 ساعة عمل.",

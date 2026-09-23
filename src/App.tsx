@@ -82,6 +82,7 @@ export default function App() {
   // Persistent references to ensure touch and scroll states are robust and do not reset on transition
   const currentSectionRef = useRef(currentSection);
   const activeSectionsRef = useRef(activeSections);
+  const activePageRef = useRef(activePage);
   const isMovingRef = useRef(isMoving);
   const isMenuOpenRef = useRef(isMenuOpen);
   const touchYRef = useRef(0);
@@ -91,6 +92,7 @@ export default function App() {
   // Sync references with React state variables on every render
   currentSectionRef.current = currentSection;
   activeSectionsRef.current = activeSections;
+  activePageRef.current = activePage;
   isMovingRef.current = isMoving;
   isMenuOpenRef.current = isMenuOpen;
 
@@ -290,6 +292,7 @@ export default function App() {
   }, [triggerAnimations]);
 
   const goToSection = useCallback((index: number) => {
+    if (activePageRef.current === 'commodities' || activePageRef.current === 'digicom') return;
     if (transitionLockRef.current || index < 0 || index >= activeSectionsRef.current.length) return;
     
     transitionLockRef.current = true;
@@ -306,6 +309,7 @@ export default function App() {
   // Handle Wheel and Touch
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      if (activePageRef.current === 'commodities' || activePageRef.current === 'digicom') return;
       if (transitionLockRef.current || isMovingRef.current || isMenuOpenRef.current) return;
       
       const target = e.target as HTMLElement | null;
@@ -356,6 +360,7 @@ export default function App() {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
+      if (activePageRef.current === 'commodities' || activePageRef.current === 'digicom') return;
       if (transitionLockRef.current || isMovingRef.current || isMenuOpenRef.current) return;
       if (hasTriggeredSwipeRef.current) {
         // Prevent supplementary triggers during this swipe motion
@@ -595,135 +600,24 @@ export default function App() {
 
         <div className={`flex flex-col items-start gap-4 xl:gap-6 w-full z-10 ${lang === 'ar' ? 'pr-8 xl:pr-10' : 'pl-8 xl:pl-10'}`}>
           {activePage === 'commodities' ? (
-            (() => {
-              const subMenus = lang === 'ar' ? [
-                {
-                  title: '',
-                  items: [
-                    { name: 'سالي للسلع', index: 0 }
-                  ]
-                },
-                {
-                  title: 'خدماتنا',
-                  items: [
-                    { name: 'التوريد والتجارة', index: 1 },
-                    { name: 'اللوجستيات والجودة', index: 2 },
-                    { name: 'علامة تجارية خاصة', index: 3 },
-                    { name: 'الاستشارة والرقمنة', index: 4 }
-                  ]
-                },
-                {
-                  title: 'منتجاتنا',
-                  items: [
-                    { name: 'أصل المغرب', index: 5 },
-                    { name: 'منتجات دولية', index: 6 }
-                  ]
-                },
-                {
-                  title: 'شبكتنا والاتصال',
-                  items: [
-                    { name: 'أسواقنا', index: 7 },
-                    { name: 'انضم إلى شبكتنا', index: 8 }
-                  ]
-                }
-              ] : lang === 'en' ? [
-                {
-                  title: '',
-                  items: [
-                    { name: 'SALI Commodities', index: 0 }
-                  ]
-                },
-                {
-                  title: 'Our services',
-                  items: [
-                    { name: 'Sourcing & trade', index: 1 },
-                    { name: 'Logistics & quality', index: 2 },
-                    { name: 'Private label', index: 3 },
-                    { name: 'Consulting & digital', index: 4 }
-                  ]
-                },
-                {
-                  title: 'Our products',
-                  items: [
-                    { name: 'Morocco origin', index: 5 },
-                    { name: 'International products', index: 6 }
-                  ]
-                },
-                {
-                  title: 'Network & contact',
-                  items: [
-                    { name: 'Our markets', index: 7 },
-                    { name: 'Join our network', index: 8 }
-                  ]
-                }
-              ] : [
-                {
-                  title: '',
-                  items: [
-                    { name: 'SALI Commodities', index: 0 }
-                  ]
-                },
-                {
-                  title: 'Nos services',
-                  items: [
-                    { name: 'Approvisionnement & commerce', index: 1 },
-                    { name: 'Logistique & qualité', index: 2 },
-                    { name: 'Marque blanche', index: 3 },
-                    { name: 'Conseil & digital', index: 4 }
-                  ]
-                },
-                {
-                  title: 'Nos produits',
-                  items: [
-                    { name: 'Origine Maroc', index: 5 },
-                    { name: 'Produits internationaux', index: 6 }
-                  ]
-                },
-                {
-                  title: 'Réseau & contact',
-                  items: [
-                    { name: 'Nos marchés', index: 7 },
-                    { name: 'Rejoignez notre réseau', index: 8 }
-                  ]
-                }
-              ];
-
-              return (
-                <div className="w-full flex flex-col gap-3.5 xl:gap-5 overflow-y-auto max-h-[60dvh] pr-2">
-                  {subMenus.map((cat, catIdx) => (
-                    <div key={catIdx} className="w-full flex flex-col gap-1.5">
-                      <span className={`text-[8.5px] lg:text-[9px] font-black tracking-[2px] uppercase text-[#1d9878]/90 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {cat.title}
-                      </span>
-                      <div className={`flex flex-col gap-1.5 border-l border-[#1c2c46]/10 pl-3 ${lang === 'ar' ? 'border-l-0 border-r pr-3 pl-0' : ''}`}>
-                        {cat.items.map((item) => {
-                          const isSelected = currentSection === item.index;
-                          return (
-                            <button 
-                              id={`nav-dot-${item.index}`}
-                              key={item.index}
-                              onClick={() => handleSectionClick(item.index)}
-                              className={`relative group flex items-center gap-2 transition-all duration-300 ${
-                                lang === 'ar' ? 'flex-row-reverse' : ''
-                              } ${isSelected ? 'text-[#1d9878]' : 'text-[#1c2c46]/50 hover:text-[#1c2c46]'}`}
-                            >
-                              <div className={`w-1.5 h-1.5 rounded-full border border-[#1c2c46]/15 transition-all duration-300 ${isSelected ? 'bg-[#1d9878] border-[#1d9878] scale-110 shadow-[0_0_8px_rgba(29,152,120,0.8)]' : 'group-hover:border-[#1c2c46]'}`} />
-                              <span className={`text-[10px] xl:text-[10.5px] font-bold uppercase tracking-[0.5px] transition-all duration-300 text-left ${lang === 'ar' ? 'text-right' : ''} ${
-                                isSelected 
-                                  ? `opacity-100 font-extrabold ${lang === 'ar' ? '-translate-x-0.5' : 'translate-x-0.5'}` 
-                                  : 'opacity-60 group-hover:opacity-100'
-                              }`}>
-                                {item.name}
-                              </span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
+            <div className="w-full flex flex-col gap-3.5 xl:gap-5 overflow-y-auto max-h-[60dvh] pr-2">
+              <div className="w-full flex flex-col gap-1.5">
+                <div className={`flex flex-col gap-1.5 border-l border-[#1c2c46]/10 pl-3 ${lang === 'ar' ? 'border-l-0 border-r pr-3 pl-0' : ''}`}>
+                  <button 
+                    id="nav-dot-0"
+                    onClick={() => handleSectionClick(0)}
+                    className={`relative group flex items-center gap-2 transition-all duration-300 text-[#1d9878] ${
+                      lang === 'ar' ? 'flex-row-reverse' : ''
+                    }`}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full border border-[#1d9878] bg-[#1d9878] scale-110 shadow-[0_0_8px_rgba(29,152,120,0.8)]" />
+                    <span className={`text-[10px] xl:text-[10.5px] font-extrabold uppercase tracking-[0.5px] transition-all duration-300 text-left ${lang === 'ar' ? 'text-right' : ''} ${lang === 'ar' ? '-translate-x-0.5' : 'translate-x-0.5'}`}>
+                      {lang === 'ar' ? 'سالي للسلع' : 'SALI Commodities'}
+                    </span>
+                  </button>
                 </div>
-              );
-            })()
+              </div>
+            </div>
           ) : activePage === 'digicom' ? (
             (() => {
               if (!isDigiComDomain) {
@@ -928,7 +822,7 @@ export default function App() {
           style={{ transform: `translateY(-${currentSection * 100}%)` }}
         >
           {/* Section Indicator */}
-          {!(activePage === 'main' && currentSection === 0) && (
+          {!(activePage === 'main' && currentSection === 0) && activePage !== 'commodities' && activePage !== 'digicom' && (
             <div className={`fixed bottom-9 z-[300] pointer-events-none lg:block hidden ${
               lang === 'ar' ? 'left-11 text-left' : 'right-11 text-right'
             }`}>
